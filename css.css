@@ -14,9 +14,16 @@
       font-family: Arial, sans-serif;
     }
 
+    html {
+      height: 100%;
+    }
+
     body {
       background: var(--color-marrom);
-      color: var(--color-dourado)
+      color: var(--color-dourado);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     header {
@@ -90,10 +97,9 @@
 
     .banner {
       margin: 30px auto;
-      width: 90%;
+      width: 100%;
       height: 320px;
       background: linear-gradient(90deg, var(--color-vinho), var(--color-vinho-claro));
-      border-radius: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -111,6 +117,26 @@
       object-fit: contain;
     }
 
+    .trust-badges {
+      width: 90%;
+      margin: 0 auto 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+      text-align: center;
+    }
+
+    .trust-badge h3 {
+      font-size: 15px;
+      margin-bottom: 6px;
+      color: var(--color-dourado);
+    }
+
+    .trust-badge p {
+      font-size: 13px;
+      color: #c9c0b8;
+    }
+
     .products-section {
       width: 90%;
       margin: auto;
@@ -122,6 +148,11 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 30px;
+      margin-top: 30px;
+      background: var(--color-vinho-claro);
+      width: 100%;
+      border-radius: 12px;
+      padding: 15px 20px;
     }
 
     .section-title h2 {
@@ -201,11 +232,12 @@
     }
 
     footer {
-      background: rgb(196, 196, 196);
+      background: rgb(0, 0, 0);
       padding: 20px;
       text-align: center;
-      border-top: 1px solid #eee;
-      color: #777;
+      border-top: 1px solid #150303;
+      color: #f0eeee;
+      margin-top: auto;
     }
 
     @media (max-width: 768px) {
@@ -225,5 +257,39 @@
 
       .banner p {
         font-size: 16px;
+      }
+
+      .trust-badges {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .product-image {
+        height: 150px;
+      }
+
+      .product-info {
+        padding: 10px;
+      }
+
+      .product-info h3 {
+        font-size: 14px;
+      }
+
+      .new-price {
+        font-size: 16px;
+      }
+
+      .old-price {
+        font-size: 12px;
+      }
+
+      .buy-btn {
+        font-size: 13px;
+        padding: 8px;
       }
     }

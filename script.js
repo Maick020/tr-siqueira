@@ -4,16 +4,16 @@
 const products = [
   { id: 1,  nome: 'Baby ET',            categoria: 'acessorios', preco: 50.00, precoAntigo: 80.00, imagem: 'imagens/et.jpeg' },
   { id: 2,  nome: 'Bolsa necessaria',      categoria: 'acessorios', preco: 25.00, precoAntigo: 39.90,  imagem: 'imagens/necessaire.jpg' },
-  { id: 3,  nome: 'Boné aba reta',     categoria: 'acessorios', preco: 50.00, precoAntigo: 79.90, imagem: 'imagens/bone-reto.jpeg' },
-  { id: 4,  nome: 'Boné aba reta bege',      categoria: 'acessorios', preco: 50.00, precoAntigo: 79.90,  imagem: 'imagens/bone-bege.jpeg' },
-  { id: 5,  nome: 'Boné bordado bege',       categoria: 'acessorios', preco: 50.00, precoAntigo: 79.90, imagem: 'imagens/bone-bordado.jpg' },
-  { id: 6,  nome: 'Boné preto truker',      categoria: 'acessorios', preco: 40.00, precoAntigo: 69.90, imagem: 'imagens/bone-truker.jpg' },
+  { id: 3,  nome: 'Boné aba reta',     categoria: 'masculino', preco: 50.00, precoAntigo: 79.90, imagem: 'imagens/bone-reto.jpeg' },
+  { id: 4,  nome: 'Boné aba reta bege',      categoria: 'masculino', preco: 50.00, precoAntigo: 79.90,  imagem: 'imagens/bone-bege.jpeg' },
+  { id: 5,  nome: 'Boné bordado bege',       categoria: 'masculino', preco: 50.00, precoAntigo: 79.90, imagem: 'imagens/bone-bordado.jpg' },
+  { id: 6,  nome: 'Boné preto truker',      categoria: 'masculino', preco: 40.00, precoAntigo: 69.90, imagem: 'imagens/bone-truker.jpg' },
   { id: 7,  nome: 'Caminhão de corrida',     categoria: 'acessorios', preco: 70.00, precoAntigo: 109.90,  imagem: 'imagens/ca-corrida.jpeg' },
   { id: 8,  nome: 'Miniatura caminhão DAF',       categoria: 'acessorios', preco: 35.00, precoAntigo: 58.90, imagem: 'imagens/daf.jpeg' },
   { id: 9,  nome: 'Miniatura caminhão Scania',      categoria: 'acessorios', preco: 35.00, precoAntigo: 58.90,  imagem: 'imagens/scania.jpeg' },
   { id: 10, nome: 'Miniatura caminhão Volvo',   categoria: 'acessorios', preco: 35.00, precoAntigo: 58.90,  imagem: 'imagens/volvo.jpeg' },
   { id: 11, nome: 'Copo termico',       categoria: 'acessorios', preco: 30.00, precoAntigo: 50.00,  imagem: 'imagens/copo.jpeg' },
-  { id: 12, nome: 'Meia cano alto  ',     categoria: 'acessorios', preco: 25.00, precoAntigo: 45.90,  imagem: 'imagens/meia.jpeg' },
+  { id: 12, nome: 'Meia cano alto  ',     categoria: 'masculino', preco: 25.00, precoAntigo: 45.90,  imagem: 'imagens/meia.jpeg' },
   { id: 13, nome: 'Camisa nossa Senhora Aparecida',     categoria: 'masculino', preco: 70.00, precoAntigo: 99.90,  imagem: 'imagens/nossa-senhora.jpg' },
   { id: 14, nome: 'Camisa cinza',     categoria: 'masculino', preco: 70.00, precoAntigo: 99.90,  imagem: 'imagens/camisa-cinza.jpg' },
   { id: 15, nome: 'Camisa rosa ',     categoria: 'feminino', preco: 70.00, precoAntigo:  99.90,  imagem: 'imagens/camisa-rosa.jpg' },
@@ -363,11 +363,11 @@ function renderCartItems() {
           ${item.tamanho !== 'Único' ? `<small>Tamanho: ${item.tamanho}</small><br/>` : ''}
           <small>${formatarPreco(produto.preco)} x ${item.qtd}</small>
         </div>
-        <div style="display:flex; align-items:center; gap:8px;">
-          <button data-action="menos" data-index="${index}" style="cursor:pointer;">-</button>
-          <span>${item.qtd}</span>
-          <button data-action="mais" data-index="${index}" style="cursor:pointer;">+</button>
-          <button data-action="remover" data-index="${index}" style="cursor:pointer; color:#a52302;">x</button>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <button class="qty-btn" data-action="menos" data-index="${index}">−</button>
+          <span style="min-width:18px; text-align:center; font-weight:bold;">${item.qtd}</span>
+          <button class="qty-btn" data-action="mais" data-index="${index}">+</button>
+          <button class="remove-btn" data-action="remover" data-index="${index}">✕</button>
         </div>
       </div>
     `;
@@ -446,6 +446,49 @@ style.innerHTML = `
   @keyframes popup {
     from { transform: scale(0.8); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
+  }
+
+  .qty-btn {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: var(--color-vinho);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+  }
+
+  .qty-btn:hover {
+    background: var(--color-vinho-claro);
+    transform: scale(1.08);
+  }
+
+  .remove-btn {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    border: 2px solid #a52302;
+    color: #a52302;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+  }
+
+  .remove-btn:hover {
+    background: #a52302;
+    color: white;
   }
 `;
 document.head.appendChild(style);
