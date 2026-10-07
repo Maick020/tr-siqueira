@@ -25,21 +25,10 @@ const CART_STORAGE_KEY = 'carrinho';
 
 const productsGrid = document.getElementById('productsGrid');
 
-/* ==========================================================
-   FILTRO POR PÁGINA
-   Cada HTML (roupas.html, acessorios.html) declara
-   `categoriasPagina` (um array) antes de carregar este script.
-   roupas.html usa ['masculino', 'feminino']; acessorios.html
-   usa ['acessorios']. O index.html não declara nada e continua
-   mostrando tudo.
-   ========================================================== */
 const produtosDaPagina = typeof categoriasPagina !== 'undefined'
   ? products.filter(p => categoriasPagina.includes(p.categoria))
   : products;
 
-/* ==========================================================
-   HELPERS
-   ========================================================== */
 function formatarPreco(valor) {
   return 'R$ ' + valor.toFixed(2).replace('.', ',');
 }
@@ -60,9 +49,7 @@ function salvarCarrinho() {
 
 let carrinho = carregarCarrinho();
 
-/* ==========================================================
-   RENDERIZAÇÃO DOS PRODUTOS
-   ========================================================== */
+
 function renderProducts(lista) {
   productsGrid.innerHTML = '';
 
@@ -114,11 +101,11 @@ function renderProducts(lista) {
 
 renderProducts(produtosDaPagina);
 
-/* ==========================================================
+/* 
    BUSCA
    A busca filtra dentro da categoria da página atual (não do
    catálogo inteiro), pra não misturar seções.
-   ========================================================== */
+    */
 function criarBarraDeBusca() {
   const header = document.querySelector('header');
   if (!header || document.querySelector('.search-box')) return;
@@ -146,9 +133,9 @@ function criarBarraDeBusca() {
 
 criarBarraDeBusca();
 
-/* ==========================================================
+/* 
    MODAL DE TAMANHOS
-   ========================================================== */
+   */
 const modal = document.createElement('div');
 modal.id = 'sizeModal';
 
@@ -220,9 +207,9 @@ function closeModal() {
   document.getElementById('modalOverlay').style.display = 'none';
 }
 
-/* ==========================================================
+/* 
    CARRINHO
-   ========================================================== */
+    */
 function adicionarAoCarrinho(product, tamanho) {
   const itemExistente = carrinho.find(
     item => item.productId === product.id && item.tamanho === tamanho
@@ -260,7 +247,7 @@ function calcularTotal() {
   }, 0);
 }
 
-/* ---------- UI do carrinho (botão + painel) ---------- */
+/*  UI do carrinho (botão + painel) */
 function criarUiCarrinho() {
   const header = document.querySelector('header');
   if (!header || document.getElementById('cartBtn')) return;
@@ -395,7 +382,7 @@ function fecharCarrinho() {
   document.getElementById('cartOverlay').style.display = 'none';
 }
 
-/* ---------- Finalizar pedido ---------- */
+/* Finalizar pedido  */
 function finalizarPedido() {
   if (carrinho.length === 0) {
     alert('Seu carrinho está vazio.');
@@ -412,7 +399,8 @@ function finalizarPedido() {
   const mensagem =
     'Olá! Quero fazer o seguinte pedido:\n\n' +
     linhas.join('\n') +
-    `\n\nTotal: ${formatarPreco(calcularTotal())}`;
+    `\n\nTotal: ${formatarPreco(calcularTotal())}`
+    + '\n\nchave pix: **********';
 
   const whatsappURL = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(mensagem)}`;
   window.open(whatsappURL, '_blank');
